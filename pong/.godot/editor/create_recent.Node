@@ -1,0 +1,10 @@
+Label
+CollisionShape2D
+ShapeCast2D
+Area2D
+Sprite2D
+CharacterBody2D
+Timer
+StaticBody2D
+ColorRect
+Node

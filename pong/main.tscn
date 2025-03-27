@@ -1,0 +1,117 @@
+[gd_scene load_steps=9 format=3 uid="uid://cekebe82m3jd5"]
+
+[ext_resource type="Script" uid="uid://blk4nel3lkq2i" path="res://main.gd" id="1_h2yge"]
+[ext_resource type="PackedScene" uid="uid://dhu878pofcgln" path="res://player.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://tu2vt8c63rg6" path="res://ball.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://dkf1i4twsx0rx" path="res://opponent.tscn" id="4_1bvp3"]
+[ext_resource type="FontFile" uid="uid://clcf53jnig0xy" path="res://assets/font.ttf" id="5_lquwl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ig7tw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1bvp3"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7mycd"]
+font = ExtResource("5_lquwl")
+
+[node name="Main" type="Node"]
+script = ExtResource("1_h2yge")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Player" parent="." instance=ExtResource("1_ig7tw")]
+position = Vector2(20, 50)
+
+[node name="WallTop" type="StaticBody2D" parent="."]
+position = Vector2(213, -10)
+scale = Vector2(21.44, 1)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallTop"]
+shape = SubResource("RectangleShape2D_ig7tw")
+
+[node name="WallBottom" type="StaticBody2D" parent="."]
+position = Vector2(213, 250)
+scale = Vector2(21.44, 1)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallBottom"]
+shape = SubResource("RectangleShape2D_ig7tw")
+
+[node name="Ball" parent="." instance=ExtResource("2_0xm2m")]
+position = Vector2(213, 120)
+
+[node name="CountDownTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="Opponent" parent="." instance=ExtResource("4_1bvp3")]
+position = Vector2(406, 190)
+
+[node name="LeftDead" type="Area2D" parent="."]
+position = Vector2(-10, 122)
+scale = Vector2(1, 12.96)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftDead"]
+shape = SubResource("RectangleShape2D_1bvp3")
+
+[node name="RightDead" type="Area2D" parent="."]
+position = Vector2(436, 122)
+scale = Vector2(1, 12.96)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightDead"]
+shape = SubResource("RectangleShape2D_1bvp3")
+
+[node name="PlayerScore" type="Label" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+label_settings = SubResource("LabelSettings_7mycd")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OpponentScore" type="Label" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+label_settings = SubResource("LabelSettings_7mycd")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountDown" type="Label" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -60.0
+offset_bottom = -60.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+label_settings = SubResource("LabelSettings_7mycd")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="timeout" from="CountDownTimer" to="." method="_on_count_down_timer_timeout"]
+[connection signal="body_entered" from="LeftDead" to="." method="_on_left_dead_body_entered"]
+[connection signal="body_entered" from="RightDead" to="." method="_on_right_dead_body_entered"]
