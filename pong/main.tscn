@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cekebe82m3jd5"]
+[gd_scene load_steps=10 format=3 uid="uid://cekebe82m3jd5"]
 
 [ext_resource type="Script" uid="uid://blk4nel3lkq2i" path="res://main.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://dhu878pofcgln" path="res://player.tscn" id="1_ig7tw"]
@@ -12,6 +12,10 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_7mycd"]
 font = ExtResource("5_lquwl")
+
+[sub_resource type="LabelSettings" id="LabelSettings_lquwl"]
+font = ExtResource("5_lquwl")
+font_size = 24
 
 [node name="Main" type="Node"]
 script = ExtResource("1_h2yge")
@@ -54,7 +58,7 @@ one_shot = true
 position = Vector2(406, 190)
 
 [node name="LeftDead" type="Area2D" parent="."]
-position = Vector2(-10, 122)
+position = Vector2(-14, 123)
 scale = Vector2(1, 12.96)
 metadata/_edit_group_ = true
 
@@ -62,7 +66,7 @@ metadata/_edit_group_ = true
 shape = SubResource("RectangleShape2D_1bvp3")
 
 [node name="RightDead" type="Area2D" parent="."]
-position = Vector2(436, 122)
+position = Vector2(440, 122)
 scale = Vector2(1, 12.96)
 metadata/_edit_group_ = true
 
@@ -109,6 +113,19 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "0"
 label_settings = SubResource("LabelSettings_7mycd")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Message" type="Label" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -80.0
+offset_bottom = -80.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Press Space Start"
+label_settings = SubResource("LabelSettings_lquwl")
 horizontal_alignment = 1
 vertical_alignment = 1
 
